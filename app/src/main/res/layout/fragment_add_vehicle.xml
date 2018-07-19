@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:elevation="5dp"
+    >
+    <LinearLayout
+        android:id="@+id/contenth_head_register_vehiculo"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:orientation="vertical"
+        android:layout_centerHorizontal="true"
+        android:background="@color/colorPrimaryDark">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="15dp"
+            android:text="Registra Un vehiculo"
+            android:textColor="@color/primary_text"/>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/content_data"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/contenth_head_register_vehiculo">
+        <TextView
+            android:id="@+id/text_description"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Coloque un nombre a su vehiculo"/>
+
+
+        <EditText
+            android:id="@+id/name_vehicle"
+            android:layout_below="@+id/text_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="Nombre"
+            android:paddingLeft="15dp"
+            android:inputType="text"
+            android:paddingRight="15dp"
+            />
+        <Spinner
+            android:id="@+id/type_vehiculo"
+            android:layout_below="@+id/name_vehicle"
+            android:layout_width="wrap_content"
+            android:gravity="center_horizontal"
+            android:textAlignment="center"
+            android:layout_height="wrap_content"
+            android:entries="@array/type_vehicles"
+            android:layout_marginTop="10dp"
+            android:layout_alignParentLeft="true"
+
+            >
+
+        </Spinner>
+
+        <Spinner
+            android:id="@+id/class_vehicle"
+            android:layout_below="@+id/name_vehicle"
+            android:layout_width="wrap_content"
+            android:gravity="center_horizontal"
+            android:textAlignment="center"
+            android:layout_height="wrap_content"
+            android:entries="@array/class_vehicles"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@+id/type_vehiculo"
+            android:layout_alignParentRight="true"
+            >
+        </Spinner>
+
+        <TextView
+            android:id="@+id/text_number_placa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/class_vehicle"
+            android:layout_centerHorizontal="true"
+            android:text="Escribe el ultimo numero de tu placa"/>
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:layout_below="@+id/text_number_placa"
+            android:layout_centerHorizontal="true"
+            android:text="numero"
+            android:paddingLeft="15dp"
+            android:gravity="center_horizontal"
+            android:paddingRight="15dp"/>
+
+    </RelativeLayout>
+    <Button
+        android:id="@+id/register_vehicle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/content_data"
+        android:background="@color/primary_text"
+        android:text="Guardar"
+        android:textColor="@color/colorPrimaryDark"
+
+        />
+
+
+
+</RelativeLayout>
