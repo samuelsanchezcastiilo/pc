@@ -2,5 +2,6 @@
     <string name="app_name">Vaymer</string>
     <string name="name_app_home">Pico y Placa </string>
     <string name="description_app">Ingresa los datos de tus vehiculos para \n mantenerte informado sobre las fechas de tu \n<b>PICO Y PLACA</b> </string>
+    <string name="main_card_title_short">Añadir un Vehiculo</string>
 
 </resources>

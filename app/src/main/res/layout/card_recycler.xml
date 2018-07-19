@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginLeft="15dp"
+    android:layout_marginRight="15dp"
+    android:layout_marginBottom="10dp"
+    android:layout_marginTop="5dp"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="6dp"
+    app:cardElevation="5dp"
+    app:cardUseCompatPadding="true">
+
+
+    <RelativeLayout
+        android:id="@+id/content_car_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_car_24dp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_car_24dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="5dp"
+
+            />
+
+        <TextView
+            android:id="@+id/name_description_vehicle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="carro casa"
+            android:padding="5dp"/>
+
+        <TextView
+            android:id="@+id/divider_content"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/divider"
+            android:layout_below="@+id/name_description_vehicle"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginRight="5dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Motocicleta"
+            android:textColor="@color/primary_text"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/type_vehicle"
+            android:layout_below="@+id/divider_content"/>
+
+
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/type_class_vehicle"
+            android:layout_below="@+id/type_vehicle"
+            android:layout_centerHorizontal="true"
+            android:text="Particular con numero terminado  en :"/>
+        <TextView
+            android:id="@+id/digito"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/digito"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/type_class_vehicle"
+            android:text="9"
+            android:textColor="@color/primary_text"
+            android:textSize="14dp"
+            />
+
+
+
+    <LinearLayout
+        android:layout_below="@+id/digito"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:orientation="vertical"
+        >
+        <TextView
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/primary_text"
+            android:text="Tienes Pico y placa el dia"/>
+
+        <GridLayout
+            android:layout_width="wrap_content"
+            android:alignmentMode="alignBounds"
+            android:layout_height="30dp"
+            android:columnCount="6"
+            android:touchscreenBlocksFocus="true"
+            android:rowCount="1"
+            android:layout_margin="5dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            >
+            <TextView
+                style="@style/calendar"
+                android:id="@+id/day_0"
+                android:layout_column="0"
+                android:layout_row="0"
+                android:text="L" />
+
+            <TextView
+                style="@style/calendar"
+                android:id="@+id/day_1"
+                android:layout_column="1"
+                android:layout_row="0"
+                android:text="M" />
+            <TextView
+                style="@style/calendar"
+                android:id="@+id/day_2"
+                android:layout_column="2"
+                android:layout_row="0"
+                android:text="Mr" />
+            <TextView
+                style="@style/calendar"
+                android:id="@+id/day_3"
+                android:layout_column="3"
+                android:layout_row="0"
+                android:text="J" />
+            <TextView
+                style="@style/calendar"
+                android:id="@+id/day_4"
+                android:layout_column="4"
+                android:layout_row="0"
+                android:text="V" />
+            <TextView
+                style="@style/calendar"
+                android:id="@+id/day_5"
+                android:layout_column="5"
+                android:layout_row="0"
+                android:text="S" />
+
+        </GridLayout>
+
+    </LinearLayout>
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>
