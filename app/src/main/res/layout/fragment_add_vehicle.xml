@@ -5,6 +5,7 @@
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
     android:elevation="5dp"
+
     >
     <LinearLayout
         android:id="@+id/contenth_head_register_vehiculo"
@@ -86,6 +87,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/class_vehicle"
             android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
             android:text="Escribe el ultimo numero de tu placa"/>
 
         <EditText

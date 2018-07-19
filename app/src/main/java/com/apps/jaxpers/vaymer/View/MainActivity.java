@@ -42,9 +42,6 @@ public class MainActivity extends AppCompatActivity {
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
         Button opennewdialog = (Button)findViewById(R.id.add_new_vehicle);
-
-        //populate recyclerview
-        //populaterecyclerView(filter);
         opennewdialog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -56,32 +53,4 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
-
-
-
-
-
-    public AlertDialog createLoginDialogo() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getApplication());
-        LayoutInflater inflater = (LayoutInflater) getApplication()
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-        View v = inflater.inflate(R.layout.fragment_add_vehicle, null);
-        builder.setView(v);
-        Button newvehicle = (Button) v.findViewById(R.id.register_vehicle);
-
-
-        newvehicle.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        // Crear Cuenta...
-
-                    }
-                }
-        );
-
-        return builder.create();
-    }
 }

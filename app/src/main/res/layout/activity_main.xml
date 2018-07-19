@@ -9,13 +9,14 @@
     >
     <LinearLayout
         android:id="@+id/content_card_main"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_centerHorizontal="true"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="70dp"
+    android:layout_marginTop="50dp"
         >
         <include layout="@layout/cardactions" ></include>
-        <include layout="@layout/card_action_view_vehicle" ></include>
+
 
     </LinearLayout>
 
