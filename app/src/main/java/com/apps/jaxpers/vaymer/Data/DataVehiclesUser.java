@@ -61,26 +61,17 @@ public class DataVehiclesUser extends SQLiteOpenHelper {
         db.close();
     }
 
-    public List<Vehicle> vehicleList(String filter) {
+    public List<Vehicle> vehicleList() {
         String query;
-        if (filter.equals("")) {
-            //regular query
-            query = "SELECT  * FROM " + TABLE_NAME;
-        } else {
-            //filter results by filter option provided
-            query = "SELECT  * FROM " + TABLE_NAME + " ORDER BY " + filter;
-        }
 
+        query = "SELECT  * FROM " + TABLE_NAME;
         List<Vehicle> vehicleLinkedList = new LinkedList<>();
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
         Vehicle vehicle;
-
         if (cursor.moveToFirst()) {
             do {
                 vehicle = new Vehicle();
-
-
                 vehicle.setNameVehicle(cursor.getString(cursor.getColumnIndex(COLUMN_VEHICLE_NAME)));
                 vehicle.setClassVehicle(cursor.getString(cursor.getColumnIndex(COLUMN_VEHICLE_CLASE)));
                 vehicle.setTypeVehicle(cursor.getString(cursor.getColumnIndex(COLUMN_VEHICLE_TYPE)));
@@ -88,7 +79,6 @@ public class DataVehiclesUser extends SQLiteOpenHelper {
                 vehicleLinkedList.add(vehicle);
             } while (cursor.moveToNext());
         }
-
 
         return vehicleLinkedList;
     }
@@ -105,7 +95,6 @@ public class DataVehiclesUser extends SQLiteOpenHelper {
         Vehicle receivedVehicle = new Vehicle();
         if (cursor.getCount() > 0) {
             cursor.moveToFirst();
-
             receivedVehicle.setNameVehicle(cursor.getString(cursor.getColumnIndex(COLUMN_VEHICLE_NAME)));
             receivedVehicle.setTypeVehicle(cursor.getString(cursor.getColumnIndex(COLUMN_VEHICLE_TYPE)));
             receivedVehicle.setClassVehicle(cursor.getString(cursor.getColumnIndex(COLUMN_VEHICLE_CLASE)));

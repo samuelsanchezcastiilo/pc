@@ -16,7 +16,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".View.MainActivity"></activity>
+        <activity android:name=".View.MainActivity" />
+        <activity android:name=".View.NewVehicle"
+            android:theme="@android:style/Theme.Holo.Light.Dialog.NoActionBar.MinWidth"></activity>
     </application>
 
 </manifest>
