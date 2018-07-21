@@ -40,7 +40,6 @@
             android:layout_marginTop="10dp"
             android:text="Coloque un nombre a su vehiculo"/>
 
-
         <EditText
             android:id="@+id/name_vehicle"
             android:layout_below="@+id/text_description"
