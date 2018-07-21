@@ -14,4 +14,8 @@
         <item>Publico</item>
     </string-array>
 
+    <string-array name="pruebaciudades">
+        <item>Cucuta</item>
+        <item>otra</item>
+    </string-array>
 </resources>

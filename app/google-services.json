@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "272577314454",
+    "firebase_url": "https://vaymer-30f11.firebaseio.com",
+    "project_id": "vaymer-30f11",
+    "storage_bucket": "vaymer-30f11.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:272577314454:android:d89295bd27fba752",
+        "android_client_info": {
+          "package_name": "com.apps.jaxpers.vaymer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "272577314454-g4gpmjkurrrbuhup5k1uie8ig6sd2puu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCV_cW1M9ZT3TzKbN4Jg3_e1TN5G_1YS-Y"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
