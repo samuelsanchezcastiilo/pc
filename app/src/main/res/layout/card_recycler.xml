@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_marginLeft="15dp"
-    android:layout_marginRight="15dp"
-    android:layout_marginBottom="10dp"
-    android:layout_marginTop="5dp"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+
     app:cardCornerRadius="6dp"
     app:cardElevation="5dp"
     app:cardUseCompatPadding="true">
@@ -17,6 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <ImageView
+            android:id="@+id/imagetypeVehicle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_car_24dp"
@@ -26,6 +26,7 @@
             />
 
         <ImageView
+            android:id="@+id/imagetypeVehicle1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_car_24dp"
@@ -64,8 +65,6 @@
 
 
         <TextView
-
-
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/type_class_vehicle"
@@ -74,21 +73,19 @@
             android:text="Particular con numero terminado  en :"/>
         <TextView
             android:id="@+id/digito"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/digito"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:gravity="center_horizontal|center_vertical"
+            android:background="@drawable/image_digito"
             android:layout_centerHorizontal="true"
             android:layout_below="@+id/type_class_vehicle"
             android:text="9"
+            android:layout_margin="10dp"
             android:textColor="@color/primary_text"
             android:textSize="14dp"
             />
-
-
-
     <LinearLayout
         android:layout_below="@+id/digito"
-        android:layout_marginTop="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -130,7 +127,7 @@
                 android:id="@+id/day_2"
                 android:layout_column="2"
                 android:layout_row="0"
-                android:text="Mr" />
+                android:text="Mi." />
             <TextView
                 style="@style/calendar"
                 android:id="@+id/day_3"
@@ -151,6 +148,15 @@
                 android:text="S" />
 
         </GridLayout>
+        <ImageButton
+            android:id="@+id/deleteVehicle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/ic_delete_black_24dp"
+            android:background="@android:color/transparent"
+            android:padding="5dp"/>
+
 
     </LinearLayout>
     </RelativeLayout>
