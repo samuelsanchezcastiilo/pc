@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.apps.jaxpers.vaymer.Data.DataVehiclesUser;
 import com.apps.jaxpers.vaymer.Model.Vehicle;
 import com.apps.jaxpers.vaymer.R;
 
@@ -23,6 +24,7 @@ public class VehicleAdapter extends RecyclerView.Adapter<VehicleAdapter.vehicleV
     private List<Vehicle> mVehicleList;
     private Context context;
     private RecyclerView recyclerView;
+    private DataVehiclesUser dataVehiclesUser;
     public VehicleAdapter(List<Vehicle> mVehicleList, Context context, RecyclerView recyclerView) {
         this.mVehicleList = mVehicleList;
         this.context = context;
@@ -41,7 +43,7 @@ public class VehicleAdapter extends RecyclerView.Adapter<VehicleAdapter.vehicleV
         holder.name_description_vehicle.setText(vehicle.getNameVehicle());
         holder.type_class_vehicle.setText(vehicle.getClassVehicle()+" con numero terminado en: ");
         holder.type_vehicle.setText(vehicle.getTypeVehicle());
-        String digito = String.valueOf(vehicle.getDigitoVehicle());
+        final String digito = String.valueOf(vehicle.getDigitoVehicle());
         holder.digito.setText(digito);
 
         if (vehicle.getTypeVehicle().equalsIgnoreCase("Carro"))
@@ -62,6 +64,9 @@ public class VehicleAdapter extends RecyclerView.Adapter<VehicleAdapter.vehicleV
                 notifyItemRemoved(position);
                 notifyItemRangeChanged(position,mVehicleList.size());
                 notifyDataSetChanged();
+                dataVehiclesUser = new DataVehiclesUser(context);
+                dataVehiclesUser.deletePersonRecord(Integer.parseInt(digito),context);
+
             }
         });
     }
@@ -70,6 +75,11 @@ public class VehicleAdapter extends RecyclerView.Adapter<VehicleAdapter.vehicleV
     public int getItemCount() {
         if(mVehicleList != null)return mVehicleList.size();
         else return 0;
+
+    }
+    public void remove(int position){
+        mVehicleList.remove(position);
+        notifyItemRemoved(position);
 
     }
 
@@ -114,6 +124,7 @@ public class VehicleAdapter extends RecyclerView.Adapter<VehicleAdapter.vehicleV
 
         }
     }
+
 
 
 }

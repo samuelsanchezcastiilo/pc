@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import com.apps.jaxpers.vaymer.Model.Vehicle;
 
+import java.sql.Time;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -22,13 +23,16 @@ public class DataVehiclesUser extends SQLiteOpenHelper {
     public static final String COLUMN_VEHICLE_CLASE = "clase";
     public static final String COLUMN_VEHICLE_DIGITO = "digito";
 
+    public static final String TABLE_ALARM = "recordatorios";
+    public static final String COLUMN_ALARM_HORA= "hour";
+    public static final String COLUMN_ALARM_MINUTO= "minute";
+
     public DataVehiclesUser(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-
         sqLiteDatabase.execSQL(" CREATE TABLE " + TABLE_NAME + " (" +
                 COLUMN_VEHICLE_NAME + " TEXT NOT NULL, " +
                 COLUMN_VEHICLE_TYPE + " TEXT NOT NULL, " +
@@ -36,11 +40,17 @@ public class DataVehiclesUser extends SQLiteOpenHelper {
                 COLUMN_VEHICLE_DIGITO + " NUMBER NOT NULL);"
         );
 
+
+
+        sqLiteDatabase.execSQL("CREATE TABLE recordatorios (hour INTEGER, minute INTEGER)");
+
+
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_ALARM);
         this.onCreate(db);
     }
 
@@ -59,6 +69,15 @@ public class DataVehiclesUser extends SQLiteOpenHelper {
         // insert
         db.insert(TABLE_NAME, null, values);
         db.close();
+    }
+
+    public void saveAlarma(int hour, int minute){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_ALARM_HORA,hour);
+        values.put(COLUMN_ALARM_MINUTO,minute);
+        db.insert(TABLE_ALARM,null,values);
+
     }
 
     public List<Vehicle> vehicleList() {
@@ -107,6 +126,19 @@ public class DataVehiclesUser extends SQLiteOpenHelper {
 
     }
 
+    public  boolean  getDataAlarm()
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT  * FROM  recordatorios " ;
+        Cursor cursor = db.rawQuery(query, null);
+        if (cursor.getCount() > 0) {
+         return true ;
+        }
+        return false;
+    }
+
+
+
 
     /**
      * delete record
@@ -126,4 +158,20 @@ public class DataVehiclesUser extends SQLiteOpenHelper {
         db.execSQL("UPDATE  " + TABLE_NAME + " SET name ='" + updatedvehicle.getNameVehicle() + "', type ='" + updatedvehicle.getTypeVehicle() + "', clase ='" + updatedvehicle.getClassVehicle() + "'  WHERE digito ='" + digito + "'");
         Toast.makeText(context, "Updated successfully.", Toast.LENGTH_SHORT).show();
     }
+
+    public void udpdateAlarma(int hour, int minute)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put("hour",hour); //These Fields should be your String values of actual column names
+        cv.put("minute",minute);
+        db.update(TABLE_ALARM,cv,null,null);
+
+
+
+
+
+
+    }
+
 }

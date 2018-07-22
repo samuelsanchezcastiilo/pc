@@ -5,10 +5,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginLeft="10dp"
     android:layout_marginRight="10dp"
-
     app:cardCornerRadius="6dp"
     app:cardElevation="5dp"
-    app:cardUseCompatPadding="true">
+    >
 
 
     <RelativeLayout
@@ -80,7 +79,7 @@
             android:layout_centerHorizontal="true"
             android:layout_below="@+id/type_class_vehicle"
             android:text="9"
-            android:layout_margin="10dp"
+            android:layout_margin="5dp"
             android:textColor="@color/primary_text"
             android:textSize="14dp"
             />

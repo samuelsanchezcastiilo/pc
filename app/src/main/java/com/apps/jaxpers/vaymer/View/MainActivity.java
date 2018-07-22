@@ -6,6 +6,7 @@ package com.apps.jaxpers.vaymer.View;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
@@ -21,7 +22,9 @@ import com.apps.jaxpers.vaymer.R;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 
 public class MainActivity extends AppCompatActivity  {
@@ -34,6 +37,9 @@ public class MainActivity extends AppCompatActivity  {
     private DatabaseReference databaseReference;
 
 
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +50,13 @@ public class MainActivity extends AppCompatActivity  {
         mRecyclerView.addItemDecoration(new DividerItemDecoration(getApplicationContext(),LinearLayoutManager.HORIZONTAL));
         mLayoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
         mRecyclerView.setLayoutManager(mLayoutManager);
+
+
+        //alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
+        //final Calendar calendar = new Calendar.getInstance();
+        //final Intent intent = new Intent(getApplicationContext(),Notifications.class);
+
+
         /*FirebaseDatabase.getInstance().setPersistenceEnabled(true);
         databaseReference = FirebaseDatabase.getInstance().getReference();
         String ciudades ;
@@ -58,8 +71,8 @@ public class MainActivity extends AppCompatActivity  {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(),NewVehicle.class);
                 startActivity(intent);
-                //DialogFragment dialogFragment = new DialogNewVehicle();
-                //dialogFragment.show(getSupportFragmentManager(),"DialogNewVehicle");
+                //DialogFragment dialogFragment = new DialogAlarm();
+                //dialogFragment.show(getSupportFragmentManager(),"DialogAlarm");
 
             }
         });
@@ -97,6 +110,14 @@ public class MainActivity extends AppCompatActivity  {
         dbHelper = new DataVehiclesUser(this);
         vehicleAdapter = new VehicleAdapter(dbHelper.vehicleList(),getApplicationContext(),mRecyclerView);
         mRecyclerView.setAdapter(vehicleAdapter);
+    }
+
+    @OnClick(R.id.openAlarm)
+    public void openTime(){
+
+        DialogFragment dialogFragment = new DialogAlarm();
+        dialogFragment.show(getSupportFragmentManager(),"DialogAlarm");
+
     }
 
 }

@@ -6,20 +6,23 @@
     android:layout_height="match_parent"
     tools:context=".View.MainActivity"
     android:background="@drawable/home2"
+    android:layout_weight="4"
     >
 
-    <include android:id="@+id/ubication_layout" layout="@layout/ubication"></include>
+    <include
+        android:id="@+id/ubication_layout"
+        layout="@layout/ubication">
+
+    </include>
     <LinearLayout
         android:id="@+id/content_card_main"
         android:layout_below="@+id/ubication_layout"
         android:layout_width="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         >
         <include layout="@layout/cardactions" ></include>
     </LinearLayout>
-
 
     <RelativeLayout
 
@@ -27,7 +30,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/content_card_main"
-        android:layout_margin="5dp"
        >
         <TextView
             android:id="@+id/text_you_vehicles"
@@ -35,7 +37,7 @@
             android:layout_height="wrap_content"
             android:text="Tus Vehiculos: "
             android:textColor="@color/primary_text"
-            android:textSize="18dp"
+            android:textSize="14dp"
             android:layout_centerHorizontal="true"/>
 
     </RelativeLayout>

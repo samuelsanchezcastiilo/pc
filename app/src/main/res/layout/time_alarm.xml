@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TimePicker
+        android:id="@+id/time"
+        android:headerBackground="@color/colorPrimary"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:amPmTextColor="@color/primary_text"
+        android:numbersInnerTextColor="@color/colorPrimary"
+        android:numbersSelectorColor="@color/colorPrimary"
+        android:numbersTextColor="@color/primary_text"></TimePicker>
+    <Button
+        android:id="@+id/saveAlarm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/time"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/buttonhome"
+        android:text="Establecer hora de aviso"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:textColor="@color/colorPrimary"
+        android:layout_marginBottom="15dp"
+        />
+
+</RelativeLayout>
