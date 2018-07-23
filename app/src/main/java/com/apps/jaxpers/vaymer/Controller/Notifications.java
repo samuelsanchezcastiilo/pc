@@ -62,14 +62,18 @@ public class Notifications extends BroadcastReceiver {
         Uri defaultSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         long[] pattern = new long[]{2000, 1000, 2000};
         NotificationCompat.Builder builder =  new NotificationCompat.Builder(context)
-                .setSmallIcon(R.drawable.common_google_signin_btn_icon_dark)
+                .setSmallIcon(R.drawable.ic_car_24dp)
                 .setContentTitle("Hoy Tienes Pico y placa")
-                .setContentText("revisa tus vehiculos hoy tienes pico y placa");
-        builder.setContentIntent(pendingIntent);
-        builder.setSound(defaultSound);
+                .setContentText("revisa tus vehiculos hoy tienes pico y placa")
+                .setAutoCancel(true)
+                .setSound(defaultSound)
+                .setVibrate(pattern)
+                .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+                .setContentIntent(pendingIntent);
+
+
         builder.setDefaults(Notification.DEFAULT_LIGHTS);
-        builder.setAutoCancel(true);
-        builder.setVibrate(pattern);
+
         NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         mNotificationManager.notify(0, builder.build());
     }
