@@ -21,8 +21,10 @@ import android.widget.TextView;
 import com.apps.jaxpers.vaymer.Apdapters.VehicleAdapter;
 import com.apps.jaxpers.vaymer.Data.DataVehiclesUser;
 
+import com.apps.jaxpers.vaymer.Model.RestricionesCiudades;
 import com.apps.jaxpers.vaymer.Model.ciudades;
 import com.apps.jaxpers.vaymer.R;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -30,6 +32,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import butterknife.BindView;
@@ -40,8 +43,8 @@ import butterknife.OnClick;
 public class MainActivity extends AppCompatActivity  {
 
     private static final String TAG = "Ma";
-    private static final String PARTICULARES = "id_R_001";
-    private static final String PUBLICOS = "id_R_002";
+    private static final String PARTICULARES = "_id_R_001";
+    private static final String PUBLICOS = "_id_R_002";
     private String ciudadItemn ;
 
     private RecyclerView mRecyclerView;
@@ -58,12 +61,6 @@ public class MainActivity extends AppCompatActivity  {
     TextView digitoParticulares;
     @BindView(R.id.digito_publicos)
     TextView digitoPublico;
-
-
-
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,7 +83,6 @@ public class MainActivity extends AppCompatActivity  {
         dataVehicles();
 
 
-
         Button opennewdialog = (Button)findViewById(R.id.add_new_vehicle);
         opennewdialog.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,7 +101,7 @@ public class MainActivity extends AppCompatActivity  {
                 lciudades.clear();
                 for (DataSnapshot dataSnapshot1: dataSnapshot.getChildren())
                 {
-                    ciudades ciudades  = dataSnapshot1.getValue(ciudades.class);
+                    ciudades  = dataSnapshot1.getValue(ciudades.class);
                     lciudades.add(ciudades.getNombre());
                 }
                 adapterCiudades.notifyDataSetChanged();
@@ -116,13 +112,67 @@ public class MainActivity extends AppCompatActivity  {
         });
 
     }
-    public void digitoParticulres(String ciudad)
+    public void getIdCiudad(String ciudad)
     {
-        Log.e(TAG, "digitoParticulres: "+databaseReference.child("ciudades").orderByChild(ciudad));
 
-        databaseReference.child("RestricionCiudades").addValueEventListener(new ValueEventListener() {
+        databaseReference = FirebaseDatabase.getInstance().getReference("ciudades");
+        databaseReference.orderByChild("nombre").equalTo(ciudad).addChildEventListener(new ChildEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                ciudades  = dataSnapshot.getValue(ciudades.class);
+                getDigitosPublicos(ciudades.getId());
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    public void getDigitosPublicos(String id_ciudad){
+
+        id_ciudad = id_ciudad+PUBLICOS+"p";
+        Calendar calendar = Calendar.getInstance();
+        final String day = String.valueOf(calendar.get(Calendar.DAY_OF_WEEK));
+
+        databaseReference = FirebaseDatabase.getInstance().getReference("RestricionCiudades");
+        databaseReference.orderByChild(id_ciudad).addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+               //RestricionesCiudades restricionesCiudades = dataSnapshot.getValue(RestricionesCiudades.class);
+                Log.e(TAG, "onChildAdded: "+ dataSnapshot.child("lunes").getValue(String.class));
+                digitoParticulares.setText("");
+                digitoParticulares.setText(dataSnapshot.child("lunes").getValue(String.class));
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
 
             }
 
@@ -141,9 +191,7 @@ public class MainActivity extends AppCompatActivity  {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                ciudadItemn = adapterView.getItemAtPosition(i).toString();
-
-                digitoParticulres(ciudadItemn);
-
+                getIdCiudad(ciudadItemn);
             }
 
             @Override
@@ -153,6 +201,18 @@ public class MainActivity extends AppCompatActivity  {
         });
 
     }
+
+
+
+
+
+
+
+
+
+
+
+
     @Override
     protected void onRestart() {
         super.onRestart();
