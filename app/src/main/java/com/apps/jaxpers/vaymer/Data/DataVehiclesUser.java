@@ -40,10 +40,7 @@ public class DataVehiclesUser extends SQLiteOpenHelper {
                 COLUMN_VEHICLE_DIGITO + " NUMBER NOT NULL);"
         );
 
-
-
-        sqLiteDatabase.execSQL("CREATE TABLE recordatorios (hour INTEGER, minute INTEGER)");
-
+        sqLiteDatabase.execSQL("CREATE TABLE recordatorios (hour INTEGER, minute INTEGER,day INTEGER)");
 
     }
 
@@ -78,6 +75,16 @@ public class DataVehiclesUser extends SQLiteOpenHelper {
         values.put(COLUMN_ALARM_MINUTO,minute);
         db.insert(TABLE_ALARM,null,values);
 
+    }
+
+    public void saveAlarmDefault(){
+        int hour = 6;
+        int minute = 05;
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_ALARM_HORA,hour);
+        values.put(COLUMN_ALARM_MINUTO,minute);
+        db.insert(TABLE_ALARM,null,values);
     }
 
     public List<Vehicle> vehicleList() {

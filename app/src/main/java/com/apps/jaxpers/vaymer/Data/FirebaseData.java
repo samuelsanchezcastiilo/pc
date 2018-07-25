@@ -2,93 +2,74 @@ package com.apps.jaxpers.vaymer.Data;
 
 import android.util.Log;
 
+import com.google.android.gms.internal.firebase_database.zzcc;
+import com.google.android.gms.internal.firebase_database.zzch;
+import com.google.android.gms.internal.firebase_database.zzck;
+import com.google.android.gms.internal.firebase_database.zzdn;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class FirebaseData {
+import static android.content.ContentValues.TAG;
 
-    private static final String PARTICULARES = "_particulares";
-    private static final String PUBLICOS = "publico";
-    private DatabaseReference databaseReference;
-    private String digitoPublicos;
-    private String digitoParticulares;
+public class FirebaseData  {
 
-    public FirebaseData(String digitoPublicos, String digitoParticulares) {
-        this.digitoPublicos = digitoPublicos;
-        this.digitoParticulares = digitoParticulares;
-        databaseReference  = FirebaseDatabase.getInstance().getReference();
-    }
+    private  DatabaseReference databaseReference;
+    private  String ciudad ;
+    private  String digito ;
+    private  String salida;
+    private  List<String> dias;
 
-    public FirebaseData() {
+    public FirebaseData( String ciudad) {
 
-        databaseReference  = FirebaseDatabase.getInstance().getReference();
-    }
-
-    public String getDigitoPublicos(String ciudad) {
+        this.ciudad = ciudad;
+        dias = new ArrayList<>();
         databaseReference = FirebaseDatabase.getInstance().getReference("RestricionCiudades/"+ciudad);
-        databaseReference.child(getDay()).addValueEventListener(new ValueEventListener() {
+
+        dias.add("prueba");
+    }
+
+
+    public void prueba()
+    {
+        Log.e(TAG, "prueba: en el metodo" );
+        ciudad = ciudad+"_particulare";
+        databaseReference = FirebaseDatabase.getInstance().getReference("RestricionCiudades/"+ciudad);
+        databaseReference.orderByKey().addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-
-                digitoPublicos = dataSnapshot.getValue().toString();
+                for ( DataSnapshot dataSnapshot1: dataSnapshot.getChildren()) {
+                    String iterator = dataSnapshot1.getChildren().toString();
+                    iterator = iterator.replace("-","");
+                    dias.add(iterator);
+                }
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
             }
         });
 
-        return digitoPublicos;
     }
 
-    public void setDigitoPublicos(String digitoPublicos) {
-        this.digitoPublicos = digitoPublicos;
-    }
-
-    public String getDigitoParticulares() {
-        return digitoParticulares;
-    }
-
-    public void setDigitoParticulares(String digitoParticulares) {
-        this.digitoParticulares = digitoParticulares;
-    }
-
-    public String   getDay()
-    {
-        Calendar calendar = Calendar.getInstance();
-        int day = calendar.get(Calendar.DAY_OF_WEEK);
-        String dayString = null;
-        switch (day){
-            case 1:
-                dayString = "domingo";
-                break;
-            case 2:
-                dayString = "lunes";
-                break;
-            case 3:
-                dayString = "martes";
-                break;
-            case 4:
-                dayString = "miercoles";
-                break;
-            case 5:
-                dayString = "jueves";
-                break;
-            case 6:
-                dayString = "viernes";
-                break;
-            case 7:
-                dayString = "sabado";
-                break;
-
+    public String  istPartticulares(){
+        String salidad = "8";
+        prueba();
+        if (dias.size() <= 1)
+        {
+            prueba();
         }
-        return  dayString;
+
+
+        Log.e(TAG, "istPartticulares: "+ dias.size()  );
+        return salidad;
     }
+
 }

@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.apps.jaxpers.vaymer.Data.DataVehiclesUser;
+import com.apps.jaxpers.vaymer.Data.FirebaseData;
 import com.apps.jaxpers.vaymer.Model.Vehicle;
 import com.apps.jaxpers.vaymer.R;
 import com.google.firebase.database.DataSnapshot;
@@ -36,17 +37,22 @@ public class VehicleAdapter extends RecyclerView.Adapter<VehicleAdapter.vehicleV
     private Context context;
     private RecyclerView recyclerView;
     private DataVehiclesUser dataVehiclesUser;
-    private List<String> digitosPublicos;
-    private  List<String> digitosPr;
+   private String ciudad;
+   private  String salida;
+   private DatabaseReference databaseReference;
+    final String[] data = new String[1];
+    private FirebaseData firebaseData;
 
 
 
-    public VehicleAdapter(List<Vehicle> mVehicleList, Context context, RecyclerView recyclerView, List<String> digitosPublicos, List<String> digitosPr) {
+    public VehicleAdapter(List<Vehicle> mVehicleList, Context context, RecyclerView recyclerView,String ciudad) {
         this.mVehicleList = mVehicleList;
         this.context = context;
         this.recyclerView = recyclerView;
-        this.digitosPublicos = digitosPublicos;
-        this.digitosPr = digitosPr;
+        this.ciudad = ciudad;
+        salida = "";
+        firebaseData = new FirebaseData(ciudad);
+
 
     }
 
@@ -58,49 +64,125 @@ public class VehicleAdapter extends RecyclerView.Adapter<VehicleAdapter.vehicleV
         return new vehicleViewHolder(view);
     }
     @Override
-    public void onBindViewHolder(vehicleViewHolder holder, final int position) {
+    public void onBindViewHolder(final vehicleViewHolder holder, final int position) {
 
         final Vehicle vehicle = mVehicleList.get(position);
-        holder.name_description_vehicle.setText(vehicle.getNameVehicle());
-        holder.type_class_vehicle.setText(vehicle.getClassVehicle()+" con numero terminado en: ");
-        holder.type_vehicle.setText(vehicle.getTypeVehicle());
-        final String digito = String.valueOf(vehicle.getDigitoVehicle());
-        holder.digito.setText(digito);
-
-        if (vehicle.getTypeVehicle().equalsIgnoreCase("Carro"))
+    holder.name_description_vehicle.setText(vehicle.getNameVehicle());
+    holder.type_class_vehicle.setText(vehicle.getClassVehicle() + " con numero terminado en: ");
+    holder.type_vehicle.setText(vehicle.getTypeVehicle());
+     String digito = String.valueOf(vehicle.getDigitoVehicle());
+    holder.digito.setText(digito);
+        if (vehicle.getClassVehicle().equalsIgnoreCase("Particular"))
         {
-            holder.imageView.setImageResource(R.drawable.ic_car_24dp);
-            holder.imageView1.setImageResource(R.drawable.ic_car_24dp);
+            databaseReference = FirebaseDatabase.getInstance().getReference("RestricionCiudades/"+ciudad+"_particulares");
+            databaseReference.orderByKey().addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    for ( DataSnapshot dataSnapshot1: dataSnapshot.getChildren()) {
+                        String iterator = dataSnapshot1.getValue().toString();
+                        iterator = iterator .replace("-","");
+                        String digitofinal = String.valueOf(vehicle.getDigitoVehicle());
+                        boolean encontrada = iterator.contains(digitofinal);
+                        if (encontrada)
+                        {
+                            switch (dataSnapshot1.getKey()){
+                                case "0":
+                                    holder.d0.setBackgroundColor(Color.BLACK);
+                                    holder.d0.setTextColor(Color.YELLOW);
+                                    break;
+                                case "1":
+                                    holder.d1.setBackgroundColor(Color.BLACK);
+                                    holder.d1.setTextColor(Color.YELLOW);
+                                    break;
+                                case "2":
+                                    holder.d2.setBackgroundColor(Color.BLACK);
+                                    holder.d2.setTextColor(Color.YELLOW);
+                                    break;
+                                case "3":
+                                    holder.d3.setBackgroundColor(Color.BLACK);
+                                    holder.d3.setTextColor(Color.YELLOW);
+                                    break;
+                                case "4":
+                                    holder.d4.setBackgroundColor(Color.BLACK);
+                                    holder.d4.setTextColor(Color.YELLOW);
+                                    break;
+                            }
+                        }
+                    }
+                }
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                }
+            });
         }else
         {
-            holder.imageView.setImageResource(R.drawable.ic_motorcycle_24dp);
-            holder.imageView1.setImageResource(R.drawable.ic_motorcycle_24dp);
+            databaseReference = FirebaseDatabase.getInstance().getReference("RestricionCiudades/"+ciudad+"_publicos");
+            databaseReference.orderByKey().addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    for ( DataSnapshot dataSnapshot1: dataSnapshot.getChildren()) {
+                        String iterator = dataSnapshot1.getValue().toString();
+                        iterator = iterator .replace("-","");
+                        String digitofinal = String.valueOf(vehicle.getDigitoVehicle());
+                        boolean encontrada = iterator.contains(digitofinal);
+                        if (encontrada)
+                        {
+                            switch (dataSnapshot1.getKey()){
+                                case "0":
+                                    holder.d0.setBackgroundColor(Color.BLACK);
+                                    holder.d0.setTextColor(Color.YELLOW);
+                                    break;
+                                case "1":
+                                    holder.d1.setBackgroundColor(Color.BLACK);
+                                    holder.d1.setTextColor(Color.YELLOW);
+                                    break;
+                                case "2":
+                                    holder.d2.setBackgroundColor(Color.BLACK);
+                                    holder.d2.setTextColor(Color.YELLOW);
+                                    break;
+                                case "3":
+                                    holder.d3.setBackgroundColor(Color.BLACK);
+                                    holder.d3.setTextColor(Color.YELLOW);
+                                    break;
+                                case "4":
+                                    holder.d4.setBackgroundColor(Color.BLACK);
+                                    holder.d4.setTextColor(Color.YELLOW);
+                                    break;
+                            }
+                        }
+                    }
+                }
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                }
+            });
+
         }
-
-            holder.d0.setBackgroundColor(Color.BLACK);
-
-
-
-        holder.delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mVehicleList.remove(position);
-                recyclerView.removeViewAt(position);
-                notifyItemRemoved(position);
-                notifyItemRangeChanged(position,mVehicleList.size());
-                notifyDataSetChanged();
-                dataVehiclesUser = new DataVehiclesUser(context);
-                dataVehiclesUser.deletePersonRecord(Integer.parseInt(digito),context);
-
-            }
-        });
+    if (vehicle.getTypeVehicle().equalsIgnoreCase("Carro")) {
+        holder.imageView.setImageResource(R.drawable.ic_car_24dp);
+        holder.imageView1.setImageResource(R.drawable.ic_car_24dp);
+    } else {
+        holder.imageView.setImageResource(R.drawable.ic_motorcycle_24dp);
+        holder.imageView1.setImageResource(R.drawable.ic_motorcycle_24dp);
+    }
+    holder.delete.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            mVehicleList.remove(position);
+            recyclerView.removeViewAt(position);
+            notifyItemRemoved(position);
+            notifyItemRangeChanged(position, mVehicleList.size());
+            notifyDataSetChanged();
+            dataVehiclesUser = new DataVehiclesUser(context);
+            dataVehiclesUser.deletePersonRecord(vehicle.getDigitoVehicle(),context);
+        }
+    });
     }
 
     @Override
     public int getItemCount() {
         if(mVehicleList != null)return mVehicleList.size();
         else return 0;
-
     }
     public void remove(int position){
         mVehicleList.remove(position);

@@ -70,10 +70,12 @@ public class DialogAlarm extends DialogFragment {
         Log.e(TAG, "dia de la semana: "+ dia );
         int hour = timePicker.getHour();
         int minute = timePicker.getMinute();
+
         dataVehiclesUser = new DataVehiclesUser(getContext());
         if(dataVehiclesUser.getDataAlarm()){
             dataVehiclesUser.udpdateAlarma(hour,minute);
             Toast.makeText(getContext(),"Se actualizo la hora de aviso",Toast.LENGTH_LONG).show();
+            Log.e(TAG, "gethour: " +timePicker.getHour());
             service();
         }else {
             dataVehiclesUser.saveAlarma(hour,minute);
@@ -85,7 +87,6 @@ public class DialogAlarm extends DialogFragment {
     }
 
     public void service(){
-        Log.e(TAG, "service: en el servicio");
         Intent intent =  new Intent(getContext(), Notifications.class);
         final PendingIntent pIntent = PendingIntent.getBroadcast(getContext(), Notifications.REQUEST_CODE, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         long firstMillis = System.currentTimeMillis();

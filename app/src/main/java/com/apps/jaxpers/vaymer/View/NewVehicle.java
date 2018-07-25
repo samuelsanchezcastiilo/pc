@@ -13,6 +13,8 @@ import com.apps.jaxpers.vaymer.Data.DataVehiclesUser;
 import com.apps.jaxpers.vaymer.Model.Vehicle;
 import com.apps.jaxpers.vaymer.R;
 
+import java.util.Calendar;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -64,10 +66,12 @@ public class NewVehicle extends Activity {
 
         Vehicle vehicle = new Vehicle(name,number,type,clase);
         dataVehiclesUser.saveNewVehicle(vehicle);
-
+        dataVehiclesUser.saveAlarmDefault();
         Toast.makeText(this,"Nuevo Vehiculo Registrado",Toast.LENGTH_LONG).show();
         DataVehiclesUser dataVehiclesUser = new DataVehiclesUser(this);
         onBackPressed();
         finish();
     }
+
+
 }

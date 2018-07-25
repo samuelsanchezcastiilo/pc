@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".View.MainActivity"
     android:background="@drawable/home2"
-    android:layout_weight="4"
     >
 
     <include
@@ -31,14 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/content_card_main"
        >
-        <TextView
-            android:id="@+id/text_you_vehicles"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Tus Vehiculos: "
-            android:textColor="@color/primary_text"
-            android:textSize="14dp"
-            android:layout_centerHorizontal="true"/>
+
 
     </RelativeLayout>
     <LinearLayout
