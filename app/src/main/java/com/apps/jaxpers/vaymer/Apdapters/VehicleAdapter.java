@@ -1,9 +1,11 @@
 package com.apps.jaxpers.vaymer.Apdapters;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,12 +14,21 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.apps.jaxpers.vaymer.Data.DataVehiclesUser;
 import com.apps.jaxpers.vaymer.Model.Vehicle;
 import com.apps.jaxpers.vaymer.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import static android.content.ContentValues.TAG;
 
 public class VehicleAdapter extends RecyclerView.Adapter<VehicleAdapter.vehicleViewHolder>{
 
@@ -25,11 +36,20 @@ public class VehicleAdapter extends RecyclerView.Adapter<VehicleAdapter.vehicleV
     private Context context;
     private RecyclerView recyclerView;
     private DataVehiclesUser dataVehiclesUser;
-    public VehicleAdapter(List<Vehicle> mVehicleList, Context context, RecyclerView recyclerView) {
+    private List<String> digitosPublicos;
+    private  List<String> digitosPr;
+
+
+
+    public VehicleAdapter(List<Vehicle> mVehicleList, Context context, RecyclerView recyclerView, List<String> digitosPublicos, List<String> digitosPr) {
         this.mVehicleList = mVehicleList;
         this.context = context;
         this.recyclerView = recyclerView;
+        this.digitosPublicos = digitosPublicos;
+        this.digitosPr = digitosPr;
+
     }
+
     @NonNull
     @Override
     public vehicleViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
@@ -39,6 +59,7 @@ public class VehicleAdapter extends RecyclerView.Adapter<VehicleAdapter.vehicleV
     }
     @Override
     public void onBindViewHolder(vehicleViewHolder holder, final int position) {
+
         final Vehicle vehicle = mVehicleList.get(position);
         holder.name_description_vehicle.setText(vehicle.getNameVehicle());
         holder.type_class_vehicle.setText(vehicle.getClassVehicle()+" con numero terminado en: ");
@@ -55,6 +76,10 @@ public class VehicleAdapter extends RecyclerView.Adapter<VehicleAdapter.vehicleV
             holder.imageView.setImageResource(R.drawable.ic_motorcycle_24dp);
             holder.imageView1.setImageResource(R.drawable.ic_motorcycle_24dp);
         }
+
+            holder.d0.setBackgroundColor(Color.BLACK);
+
+
 
         holder.delete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,6 +107,10 @@ public class VehicleAdapter extends RecyclerView.Adapter<VehicleAdapter.vehicleV
         notifyItemRemoved(position);
 
     }
+
+
+
+
 
 
     public class vehicleViewHolder extends RecyclerView.ViewHolder {

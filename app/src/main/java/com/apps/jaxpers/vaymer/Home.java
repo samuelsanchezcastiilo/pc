@@ -27,6 +27,7 @@ public class Home extends AppCompatActivity {
     public void submit(View view) {
         Intent intent =  new Intent(this,MainActivity.class);
         startActivity(intent);
+        finish();
 
     }
 }
